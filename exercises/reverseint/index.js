@@ -9,6 +9,7 @@
 //   reverseInt(-90) === -9
 
 function reverseInt(n) {
+  let reversed = n
   //Solution 1: Got clues to use toString, parseInt, and Math.sign()
   //Didn't know that parsInt would return a positive value for a string like "15-" so I
   //removed the sign from the string initially.

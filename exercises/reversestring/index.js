@@ -6,7 +6,7 @@
 //   reverse('hello') === 'olleh'
 //   reverse('Greetings!') === '!sgniteerG'
 
-function reverse(str) {
+function reverse(str) { 
   //2019 solutions
   /* Solution 1: Use the forEach helper method to loop through each character and create the
                  a reversed copy of the input string

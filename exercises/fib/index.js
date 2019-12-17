@@ -8,48 +8,57 @@
 // Example:
 //   fib(4) === 3
 
-function memoize(fn){
+function memoize(fn) {
   const cache = {};
-  return (...args) => {
-      if(cache[args]){
-        return cache[args];
-      }
-      const result = fn.apply(this,args);
-      cache[args] = result;
-      return result;
-  }
+  return function(...args) {
+    if (cache[args]) {
+      return cache[args];
+    }
+
+    // const result = fn.apply(this, args);
+    const result = fn(...args);
+    cache[args] = result;
+
+    return result;
+  };
 }
 
 function fib(n) {
-  if ( n< 2) return n;
-  return fib(n-1) + fib(n-2);
-  /*Solution 1
-  if (n === 0) return 0;
-  if (n === 1) return 1;
+  if (n < 2) {
+    return n;
+  }
 
+  return fib(n - 2) + fib(n - 1);
+}
+
+fib = memoize(fib);
+
+//Solution 1: Use 3 variables
+/*
+  if (n === 0) {
+    return 0;
+  }
+  if (n === 1) {
+    return 1;
+  }
+  let sum = 0;
   let n_2 = 0;
   let n_1 = 1;
-  let currentIndex = 2;
-  let sum = n_2 + n_1;
-  while(currentIndex <= n){
+  for (let i = 2; i <= n; i++) {
     sum = n_2 + n_1;
     n_2 = n_1;
     n_1 = sum;
-    currentIndex++;
   }
-  return sum;
+  return sum;*/
+//Solution 2: Use an array to hold the previous values
+/*let results = [0, 1];
+  for (let i = 2; i <= n; i++) {
+    const a = results[i - 1];
+    const b = results[i - 2];
+    //results[i] = a + b;
+    results.push(a + b);
+  }
+  return results[n];
   */
- /* Solution 2:
- const result = [0,1];
- for (let i=2; i <=n; i++){
-   const a = result[i-1];
-   const b = result[i-2];
-   result.push(a+b);
- }
- return result[n];
- */
-}
-fib = memoize(fib);
-
 
 module.exports = fib;

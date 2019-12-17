@@ -9,13 +9,17 @@
 //     q.remove(); // returns 1;
 
 class Queue {
-  constructor(){
+  constructor() {
     this.data = [];
   }
-  add(val){
-    this.data.push(val);
+
+  add(value) {
+    //this.data.unshift(value);
+    this.data.push(value);
   }
-  remove(){
+
+  remove() {
+    //return this.data.pop()
     return this.data.shift();
   }
 }

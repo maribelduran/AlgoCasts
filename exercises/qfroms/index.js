@@ -12,31 +12,67 @@
 //     q.remove(); // returns 1
 //     q.remove(); // returns 2
 
-const Stack = require('./stack');
+const Stack = require("./stack");
 
 class Queue {
-  constructor(){
-    this.stack1 = new Stack();
-    this.stack2 = new Stack();  
+  constructor() {
+    this.stackOne = new Stack();
+    this.stackTwo = new Stack();
   }
-  add(value){
-    //empty current stack1 and push to stack2 
-    while(this.stack1.peek()){
-      this.stack2.push(this.stack1.pop());
+
+  add(value) {
+    //empty current stackOne and move to stackTwo
+    while (this.stackOne.peek()) {
+      this.stackTwo.push(this.stackOne.pop());
     }
-    //then add the new value to be stack1
-    this.stack1.push(value);
-    //then push the values from stack2 back to stack1
-    while(this.stack2.peek()){
-      this.stack1.push(this.stack2.pop());
+    //add the new value to stackOne
+    this.stackOne.push(value);
+
+    //push the values back to stackOne
+    while (this.stackTwo.peek()) {
+      this.stackOne.push(this.stackTwo.pop());
     }
   }
-  remove(){
-    return this.stack1.pop();
+
+  remove() {
+    return this.stackOne.pop();
   }
-  peek(){
-    return this.stack1.peek();
+
+  peek() {
+    return this.stackOne.peek();
   }
+
+  /*add(value) {
+    this.stackOne.push(value);
+  }
+
+  remove() {
+    while (this.stackOne.peek()) {
+      this.stackTwo.push(this.stackOne.pop());
+    }
+    const removed = this.stackTwo.pop();
+
+    //move items back to stackOne
+    while (this.stackTwo.peek()) {
+      this.stackOne.push(this.stackTwo.pop());
+    }
+    return removed;
+  }
+
+  peek() {
+    while (this.stackOne.peek()) {
+      this.stackTwo.push(this.stackOne.pop());
+    }
+    const next = this.stackTwo.peek();
+
+    //move items back to stackOne
+    while (this.stackTwo.peek()) {
+      this.stackOne.push(this.stackTwo.pop());
+    }
+
+    return next;
+  }
+  */
 }
 
 module.exports = Queue;
