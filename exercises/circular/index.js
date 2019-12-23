@@ -13,15 +13,17 @@
 //   circular(l) // true
 
 function circular(list) {
-  let slowPointer = list.getFirst();
-  let fastPointer = list.getFirst();
+  if (!list.head) {
+    return false;
+  }
 
-  //check that there is a next node after the node that is being pointed by
-  //fastPinter and that there is a node after that next node. 
-  while (fastPointer.next && fastPointer.next.next){
-    slowPointer = slowPointer.next;
-    fastPointer = fastPointer.next.next;
-    if (slowPointer === fastPointer){
+  let slow = list.head;
+  let fast = list.head;
+
+  while (fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) {
       return true;
     }
   }
