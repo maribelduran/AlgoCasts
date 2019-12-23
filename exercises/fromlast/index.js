@@ -12,23 +12,19 @@
 //    fromLast(list, 2).data // 'b'
 
 function fromLast(list, n) {
-  //create two pointers that both start at the head of the list
-  let slowPointer = list.head;
-  let fastPointer = list.head;
-  //initially want to move the fastPointer n positions
-  while(n>0){
-    fastPointer = fastPointer.next;
+  let slow = list.head;
+  let fast = list.head;
+
+  while (n > 0) {
+    fast = fast.next;
     n--;
   }
-  //go into a while loop that argues that the fastPointer has a next node
-    while(fastPointer.next){
-      //move slowPointer to the next node
-     //move fastPointer to the next node
-      slowPointer = slowPointer.next;
-      fastPointer = fastPointer.next;
-    }
-    return slowPointer;
-  //return slowPointer;
+
+  while (fast.next) {
+    slow = slow.next;
+    fast = fast.next;
+  }
+  return slow;
 }
 
 module.exports = fromLast;
