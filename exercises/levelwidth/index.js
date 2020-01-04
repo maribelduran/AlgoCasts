@@ -12,22 +12,21 @@
 // Answer: [1, 3, 2]
 
 function levelWidth(root) {
-  let queue = [root, "eOfLevel"];
-  let widths = [0];
+  const widths = [0];
+  const flag = "endOfLevel";
+  const array = [root, flag];
 
-  while(queue.length > 1){
-    let node = queue.shift();
-    if (node !== "eOfLevel"){
-        queue.push(...node.children);
-        widths[widths.length-1] +=1;
-      
-    }else{(node === "eOfLevel")
+  while (array.length > 1) {
+    let node = array.shift();
+    if (node === flag) {
       widths.push(0);
-      queue.push("eOfLevel")
+      array.push(flag);
+    } else {
+      array.push(...node.children);
+      widths[widths.length - 1]++;
     }
   }
   return widths;
 }
-
 
 module.exports = levelWidth;
