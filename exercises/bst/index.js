@@ -12,26 +12,31 @@
 // and return the Node in the tree with the same value.
 
 class Node {
-  constructor(data){
+  constructor(data) {
     this.data = data;
     this.left = null;
     this.right = null;
   }
-  insert(data){
-   if (this.data > data && this.left){
-     this.left.insert(data);
-   }else if(this.data > data){
-    this.left = new Node(data);
-   }else if (this.data < data && this.right){
-     this.right.insert(data);
-   }else if (this.data < data){
-     this.right = new Node(data);
-   }
+  insert(data) {
+    if (this.left && this.data > data) {
+      this.left.insert(data);
+    } else if (this.data > data) {
+      this.left = new Node(data);
+    } else if (this.right && this.data < data) {
+      this.right.insert(data);
+    } else if (this.data < data) {
+      this.right = new Node(data);
+    }
   }
-  contains(data){
-    if (this.data === data) return this;
-    if (this.data > data && this.left) return this.left.contains(data);
-    if (this.data < data && this.right) return this.right.contains(data);
+  contains(data) {
+    if (data === this.data) {
+      return this;
+    }
+    if (this.left && data < this.data) {
+      return this.left.contains(data);
+    } else if (this.right && data > this.data) {
+      return this.right.contains(data);
+    }
     return null;
   }
 }
