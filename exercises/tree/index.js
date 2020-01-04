@@ -11,41 +11,41 @@
 // function that gets called with each element in the tree
 
 class Node {
-  constructor(data){
+  constructor(data) {
     this.data = data;
     this.children = [];
   }
-  add(data){
+  add(data) {
     this.children.push(new Node(data));
   }
-  remove(data){
-    this.children = this.children.filter(node => {
-      return node.data !== data
-    });
+  remove(data) {
+    const filteredChildren = this.children.filter(child => child.data !== data);
+    this.children = filteredChildren;
   }
 }
 
 class Tree {
-  constructor(){
+  constructor() {
     this.root = null;
   }
-  traverseBF(fn){
-    let queue = [this.root];
-    while(queue.length){
-      const node = queue.shift();
-      queue.push(...node.children);
-      /*node.children.forEach(function(child){
-        queue.push(child);
-      });
-      */
-     fn(node);
+
+  traverseBF(fn) {
+    const container = [this.root];
+
+    while (container.length) {
+      let node = container.shift();
+      container.push(...node.children);
+
+      fn(node);
     }
   }
-  traverseDF(fn){
-    let queue = [this.root];
-    while(queue.length){
-      const node = queue.shift();
-      queue.unshift(...node.children);
+  traverseDF(fn) {
+    const container = [this.root];
+
+    while (container.length) {
+      let node = container.shift();
+      container.unshift(...node.children);
+
       fn(node);
     }
   }

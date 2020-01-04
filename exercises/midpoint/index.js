@@ -13,16 +13,18 @@
 //   midpoint(l); // returns { data: 'b' }
 
 function midpoint(list) {
-  if (!list.head) return null;
-  let slow = list.getFirst();
-  let fast =  list.getFirst();
+  if (!list.head) {
+    return null;
+  }
 
-  while(fast.next && fast.next.next){
-    slow = slow.next;
+  let slow = list.head;
+  let fast = list.head;
+
+  while (fast.next && fast.next.next) {
     fast = fast.next.next;
+    slow = slow.next;
   }
   return slow;
-
 }
 
 module.exports = midpoint;
